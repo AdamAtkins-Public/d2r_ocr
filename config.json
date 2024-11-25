@@ -1,0 +1,7 @@
+{
+	"session_folder": "C:\\Users\\ajatkins\\Documents\\D2_Sessions",
+	"tesseract_cmd": "C:\\Users\\ajatkins\\AppData\\Local\\Programs\\Tesseract-OCR\\tesseract.exe",
+	"cv_text_detector_model": "C:\\Users\\ajatkins\\Desktop\\OCR models\\frozen_east_text_detection.pb",
+	"cv_image_resolution_H":1056,
+	"cv_image_resolution_W":1920 
+}
