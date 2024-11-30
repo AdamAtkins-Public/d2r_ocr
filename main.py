@@ -7,9 +7,11 @@ import math
 from matplotlib import pyplot as plt
 import pytesseract
 import text_detection
+import analytics
 import testing
 
 _test_image = "C:\\Users\\ajatkins\\Desktop\\OCR models\\test_image\\Screenshot016.png"
+_path = r'C:\Users\ajatkins\Documents\D2_Sessions\testa'
 
 if __name__ == '__main__':
 
@@ -30,8 +32,5 @@ if __name__ == '__main__':
                                                     config["cv_image_resolution_H"]
                                                    )
 
-    [original,detection_boxes] = text_detector.detect_image(_test_image)
-    results = text_detection.tesseract_experience_value([[original,detection_boxes]])
 
-    testing.display(detection_boxes,original)
-    print(results[0][1])
+    analytics.process_session(_path,text_detector)

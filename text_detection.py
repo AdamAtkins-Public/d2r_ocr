@@ -224,6 +224,9 @@ def tesseract_experience_value(image_detection_box_pairs):
                                                      int(box[0][0]):int(box[2][0])])
             if text.startswith("EXPERIENCE"):
                 break
+        #[TODO]
+        #try catch indexing exception for if no text contains target
+        #handle logging and value = 0
         value = text[text.index(":")+1:text.index("/")]
         results.append([image,int(value.replace(",","").strip(" "))])
     return results
