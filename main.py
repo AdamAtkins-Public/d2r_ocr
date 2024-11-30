@@ -1,7 +1,6 @@
 ﻿
 import os
 import json
-#import tensorflow as tf
 import numpy as np
 import cv2 as cv
 import math
@@ -32,14 +31,7 @@ if __name__ == '__main__':
                                                    )
 
     [original,detection_boxes] = text_detector.detect_image(_test_image)
-    text = []
-    with timer:
-        for box in detection_boxes:
-            #cropped
-            text.append(pytesseract.image_to_string(original[int(box[0][1]):int(box[1][1]),
-                                                             int(box[0][0]):int(box[2][0])]))
-            #decoded
-    print(timer.duration())
+    results = text_detection.tesseract_experience_value([[original,detection_boxes]])
 
-    print(text)
     testing.display(detection_boxes,original)
+    print(results[0][1])

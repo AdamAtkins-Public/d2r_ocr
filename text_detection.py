@@ -1,5 +1,6 @@
 
 import cv2 as cv
+import pytesseract
 import numpy as np
 import math
 
@@ -206,8 +207,27 @@ class CV_Text_Detector():
         detection_boxes = self.post_process_detection(boxes,confidences,r_width,r_height)
         return [original,detection_boxes]
 
-    def process_session(self,session):
-        pass
+def tesseract_experience_value(image_detection_box_pairs):
+    """
+        extracts the experience value from images from a collection of (image,boundary_box) pairs
+
+        input: [[image,bounding_box]]
+        output: [[image,value]]
+    """
+
+    text = ''
+    results = []
+    for pair in image_detection_box_pairs:
+        image, boxes = pair[0], pair[1]
+        for box in boxes:
+            text = pytesseract.image_to_string(image[int(box[0][1]):int(box[1][1]),
+                                                     int(box[0][0]):int(box[2][0])])
+            if text.startswith("EXPERIENCE"):
+                break
+        value = text[text.index(":")+1:text.index("/")]
+        results.append([image,int(value.replace(",","").strip(" "))])
+    return results
+
 
 
 
