@@ -55,11 +55,13 @@ def process_session(session_dir_path,text_detector):
     segments = [data[0] for data in dataset]
     values = [data[1] for data in dataset]
 
+    plt.xticks(rotation=90)
     ax.bar(segments,values)
     ax.set_ylabel('Experience gained')
     ax.set_title('Experienced gained per segment')
 
-    plt.show()
+    fig.savefig(session_dir_path + "\\bargraph.png")
+    plt.close(fig)
 
     #boxplot: experience gained per session
     fig, ax = plt.subplots()
@@ -71,7 +73,8 @@ def process_session(session_dir_path,text_detector):
     ax.set_ylabel('Experience gained')
     ax.set_title('Experienced gained per session')
 
-    plt.show()
+    fig.savefig(session_dir_path + "\\boxplot.png")
+    plt.close(fig)
 
     #table: row: segment col: delta exp, delta time min, average exp/min
     delta_exp = [data[1] for data in dataset]
@@ -80,13 +83,20 @@ def process_session(session_dir_path,text_detector):
     row_labels = [data[0] for data in dataset]
     col_labels = ['Experience','Duration (min)','Experience/min']
 
-    df = pd.DataFrame({
-        col_labels[0] : delta_exp,
-        col_labels[1] : delta_time,
-        col_labels[2] : exp_per_minute
-        },index = row_labels)
-    print(df)
-    return results
+    segments = pd.DataFrame({
+                col_labels[0] : delta_exp,
+                col_labels[1] : delta_time,
+                col_labels[2] : exp_per_minute
+                },index = row_labels)
+
+    averages = pd.DataFrame({
+                "Average Experience": int(sum(delta_exp)/len(delta_exp)),
+                "Average Duration": float(format(sum(delta_time)/len(delta_time), '.2f'))
+                },index=[0])
+
+    with open(session_dir_path + "\\table.txt",mode='w') as f:
+        print(segments, file=f)
+        print(averages, file=f)
 
 if __name__ == '__main__':
     #test

@@ -11,7 +11,7 @@ import analytics
 import testing
 
 _test_image = "C:\\Users\\ajatkins\\Desktop\\OCR models\\test_image\\Screenshot016.png"
-_path = r'C:\Users\ajatkins\Documents\D2_Sessions\testa'
+_path = r'C:\Users\ajatkins\Documents\D2_Sessions\testb'
 
 if __name__ == '__main__':
 
